@@ -70,17 +70,19 @@
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "headless": false,
+      "headless": true,
       "boot_wait": "2m",
       "winrm_username": "vagrant",
       "winrm_password": "vagrant",
       "winrm_timeout": "6h",
-      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "shutdown_command": "A:/shutdown-Packer.bat",
       "guest_os_type": "Windows2012_64",
       "guest_additions_mode": "disable",
       "disk_size": 61440,
       "floppy_files": [
         "{{user `autounattend`}}",
+        "./scripts/unattend.xml",
+        "./scripts/shutdown-Packer.bat",
         "./floppy/WindowsPowershell.lnk",
         "./floppy/PinTo10.exe",
         "./scripts/disable-screensaver.ps1",
@@ -88,7 +90,7 @@
         "./scripts/enable-winrm.ps1",
         "./scripts/microsoft-updates.bat",
         "./scripts/win-updates.ps1",
-        "./scripts/oracle-cert.cer"
+        "./scripts/oracle-cert.cer" 
       ],
       "vboxmanage": [
         [
@@ -140,7 +142,7 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows_2016_{{.Provider}}.box",
+      "output": "spfarm_base_windows_2016_{{.Provider}}.box",
       "vagrantfile_template": "vagrantfile-windows_2016.template"
     }
   ],
